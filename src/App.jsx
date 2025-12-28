@@ -12,7 +12,7 @@ import { ThemeProvider } from './context/ThemeContext';
 function App() {
   return (
     <ThemeProvider>
-      <BrowserRouter>
+      <BrowserRouter basename="/propfirm-dashboard">
         <Toaster position="top-right" richColors />
         <Routes>
           <Route path="/" element={<LandingPage />} />
