@@ -4,7 +4,11 @@
       "Bash(if [ -f .gitignore ])",
       "Bash(then echo \"exists\")",
       "Bash(else echo \"not exists\")",
-      "Bash(fi)"
+      "Bash(fi)",
+      "Bash(git mv:*)",
+      "Bash(npm run build:*)",
+      "Bash(npm run dev:*)",
+      "Bash(git add:*)"
     ],
     "deny": [],
     "ask": []
