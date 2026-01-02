@@ -1,9 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Zap } from 'lucide-react';
 import { PROP_FIRM_DISCOUNTS } from '../../data/discounts';
 import PropFirmDiscountRow from './PropFirmDiscountRow';
 
 export default function DiscountSection() {
+  const [activeCategory, setActiveCategory] = useState('期貨');
+
+  // Filter discounts by category
+  const filteredDiscounts = PROP_FIRM_DISCOUNTS.filter(
+    discount => discount.category === activeCategory
+  );
+
   return (
     <section id="discounts" className="py-24 relative z-10">
       <div className="container mx-auto px-6 max-w-6xl">
@@ -22,23 +29,29 @@ export default function DiscountSection() {
             </p>
           </div>
 
-          {/* Stats Bar */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-            <div className="bg-white dark:bg-[#111827]/60 backdrop-blur-sm rounded-xl p-4 border border-slate-200 dark:border-slate-800 text-center">
-              <div className="text-2xl font-black text-amber-600 dark:text-amber-400 mb-1">{PROP_FIRM_DISCOUNTS.length}</div>
-              <div className="text-xs text-slate-500 dark:text-slate-400 font-medium">專屬優惠</div>
-            </div>
-            <div className="bg-white dark:bg-[#111827]/60 backdrop-blur-sm rounded-xl p-4 border border-slate-200 dark:border-slate-800 text-center">
-              <div className="text-2xl font-black text-emerald-600 dark:text-emerald-400 mb-1">最高50%</div>
-              <div className="text-xs text-slate-500 dark:text-slate-400 font-medium">折扣優惠</div>
-            </div>
-            <div className="bg-white dark:bg-[#111827]/60 backdrop-blur-sm rounded-xl p-4 border border-slate-200 dark:border-slate-800 text-center">
-              <div className="text-2xl font-black text-blue-600 dark:text-blue-400 mb-1">即時</div>
-              <div className="text-xs text-slate-500 dark:text-slate-400 font-medium">立即使用</div>
-            </div>
-            <div className="bg-white dark:bg-[#111827]/60 backdrop-blur-sm rounded-xl p-4 border border-slate-200 dark:border-slate-800 text-center">
-              <div className="text-2xl font-black text-purple-600 dark:text-purple-400 mb-1">每週</div>
-              <div className="text-xs text-slate-500 dark:text-slate-400 font-medium">更新優惠</div>
+          {/* Category Tabs */}
+          <div className="flex justify-center mb-8">
+            <div className="inline-flex bg-white dark:bg-[#111827]/60 backdrop-blur-sm p-1.5 rounded-xl border border-slate-200 dark:border-slate-800 gap-2">
+              <button
+                onClick={() => setActiveCategory('期貨')}
+                className={`px-6 py-2.5 text-sm font-bold rounded-lg transition-all ${
+                  activeCategory === '期貨'
+                    ? 'bg-gradient-to-r from-amber-600 to-orange-600 text-white shadow-lg shadow-amber-900/20'
+                    : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-slate-800/50'
+                }`}
+              >
+                期貨
+              </button>
+              <button
+                onClick={() => setActiveCategory('CFD外匯')}
+                className={`px-6 py-2.5 text-sm font-bold rounded-lg transition-all ${
+                  activeCategory === 'CFD外匯'
+                    ? 'bg-gradient-to-r from-cyan-600 to-blue-600 text-white shadow-lg shadow-cyan-900/20'
+                    : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-slate-800/50'
+                }`}
+              >
+                CFD外匯
+              </button>
             </div>
           </div>
         </div>
@@ -54,9 +67,15 @@ export default function DiscountSection() {
 
         {/* Discount List */}
         <div className="flex flex-col gap-4">
-          {PROP_FIRM_DISCOUNTS.map(firm => (
-            <PropFirmDiscountRow key={firm.id} firm={firm} />
-          ))}
+          {filteredDiscounts.length > 0 ? (
+            filteredDiscounts.map(firm => (
+              <PropFirmDiscountRow key={firm.id} firm={firm} />
+            ))
+          ) : (
+            <div className="text-center py-12 text-slate-500 dark:text-slate-400">
+              此類別暫無優惠
+            </div>
+          )}
         </div>
       </div>
     </section>

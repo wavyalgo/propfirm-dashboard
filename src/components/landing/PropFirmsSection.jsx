@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { Zap, Terminal, BarChart2, ArrowRight } from 'lucide-react';
 import { propFirms } from '../../data/propFirms';
 import FirmCard from './FirmCard';
@@ -6,9 +6,12 @@ import FirmCard from './FirmCard';
 export default function PropFirmsSection() {
   const [activeTab, setActiveTab] = useState('all');
 
-  const filteredFirms = activeTab === 'all'
-    ? propFirms
-    : propFirms.filter(firm => firm.type.toLowerCase() === activeTab);
+  // 使用 useMemo 優化過濾邏輯，避免每次渲染都重新計算
+  const filteredFirms = useMemo(() => {
+    return activeTab === 'all'
+      ? propFirms
+      : propFirms.filter(firm => firm.type.toLowerCase() === activeTab);
+  }, [activeTab]);
 
   return (
     <section id="firms" className="py-24 px-6 relative z-10 bg-slate-100 dark:bg-[#0B1120]/50 border-y border-slate-200 dark:border-slate-800">

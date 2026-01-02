@@ -1,5 +1,6 @@
 // Prop Firm 折扣優惠數據
 export const PROP_FIRM_DISCOUNTS = [
+  // CFD外匯
   {
     id: 1,
     rank: 1,
@@ -10,7 +11,8 @@ export const PROP_FIRM_DISCOUNTS = [
     discount: "20% OFF",
     code: "MATCH",
     link: "#",
-    color: "emerald"
+    color: "emerald",
+    category: "CFD外匯"
   },
   {
     id: 2,
@@ -22,7 +24,8 @@ export const PROP_FIRM_DISCOUNTS = [
     discount: "25% OFF",
     code: "MATCH5",
     link: "#",
-    color: "blue"
+    color: "blue",
+    category: "CFD外匯"
   },
   {
     id: 3,
@@ -34,30 +37,152 @@ export const PROP_FIRM_DISCOUNTS = [
     discount: "35% OFF",
     code: "MATCHXMAS",
     link: "#",
-    color: "purple"
+    color: "purple",
+    category: "CFD外匯"
   },
+
+  // 期貨
   {
     id: 4,
-    rank: 4,
-    name: "Alpha Capital",
-    logo: "AC",
-    rating: 4.4,
-    reviews: 785,
+    rank: 1,
+    name: "Tradeify",
+    logo: "TF",
+    rating: 4.7,
+    reviews: 1245,
     discount: "30% OFF",
     code: "MATCH30",
     link: "#",
-    color: "indigo"
+    color: "emerald",
+    category: "期貨"
   },
   {
     id: 5,
-    rank: 5,
-    name: "QT Funded",
-    logo: "QT",
-    rating: 3.9,
-    reviews: 501,
-    discount: "50% OFF",
-    code: "MATCHINSTANT",
+    rank: 2,
+    name: "Topstep",
+    logo: "TS",
+    rating: 4.6,
+    reviews: 2103,
+    discount: "20% OFF",
+    code: "MATCH20",
     link: "#",
-    color: "amber"
+    color: "blue",
+    category: "期貨"
+  },
+  {
+    id: 6,
+    rank: 3,
+    name: "Lucid Trading",
+    logo: "LT",
+    rating: 4.5,
+    reviews: 892,
+    discount: "25% OFF",
+    code: "traderk",
+    link: "#",
+    color: "indigo",
+    category: "期貨"
+  },
+  {
+    id: 7,
+    rank: 4,
+    name: "Take Profit Trader",
+    logo: "TPT",
+    rating: 4.4,
+    reviews: 1567,
+    discount: "40% OFF",
+    code: "MATCH40",
+    link: "#",
+    color: "purple",
+    category: "期貨"
+  },
+  {
+    id: 8,
+    rank: 5,
+    name: "Apex Funding",
+    logo: "AF",
+    rating: 4.3,
+    reviews: 1834,
+    discount: "35% OFF",
+    code: "MATCH35",
+    link: "#",
+    color: "amber",
+    category: "期貨"
+  },
+  {
+    id: 9,
+    rank: 6,
+    name: "Fundednext Futures",
+    logo: "FNF",
+    rating: 4.2,
+    reviews: 743,
+    discount: "30% OFF",
+    code: "MATCH30",
+    link: "#",
+    color: "orange",
+    category: "期貨"
+  },
+  {
+    id: 10,
+    rank: 7,
+    name: "Alpha Futures",
+    logo: "AF",
+    rating: 4.4,
+    reviews: 1021,
+    discount: "25% OFF",
+    code: "MATCH25",
+    link: "#",
+    color: "cyan",
+    category: "期貨"
+  },
+  {
+    id: 11,
+    rank: 8,
+    name: "Fundingticks",
+    logo: "FT",
+    rating: 4.1,
+    reviews: 654,
+    discount: "20% OFF",
+    code: "MATCH20",
+    link: "#",
+    color: "teal",
+    category: "期貨"
+  },
+  {
+    id: 12,
+    rank: 9,
+    name: "E8 Markets Futures",
+    logo: "E8F",
+    rating: 4.5,
+    reviews: 923,
+    discount: "30% OFF",
+    code: "MATCH30",
+    link: "#",
+    color: "sky",
+    category: "期貨"
+  },
+  {
+    id: 13,
+    rank: 10,
+    name: "TradeDay",
+    logo: "TD",
+    rating: 4.3,
+    reviews: 1156,
+    discount: "35% OFF",
+    code: "MATCH35",
+    link: "#",
+    color: "violet",
+    category: "期貨"
+  },
+  {
+    id: 14,
+    rank: 11,
+    name: "Daytraders",
+    logo: "DT",
+    rating: 4.0,
+    reviews: 587,
+    discount: "25% OFF",
+    code: "MATCH25",
+    link: "#",
+    color: "rose",
+    category: "期貨"
   }
 ];

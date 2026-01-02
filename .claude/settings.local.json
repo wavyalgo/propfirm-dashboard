@@ -1,13 +1,13 @@
 {
   "permissions": {
     "allow": [
-      "Bash(if [ -f .gitignore ])",
-      "Bash(then echo \"exists\")",
-      "Bash(else echo \"not exists\")",
-      "Bash(fi)",
-      "Bash(git mv:*)",
-      "Bash(npm run build:*)",
+      "Bash(sort:*)",
       "Bash(npm run dev:*)",
+      "Bash(npm run build:*)",
+      "Bash(Get-Content \"D:\\\\交易旅人\\\\.vite\\\\deps_temp_*\\\\package.json\" -ErrorAction SilentlyContinue)",
+      "Bash(Select-Object -First 1)",
+      "Bash(powershell -Command:*)",
+      "Bash(npx eslint:*)",
       "Bash(git add:*)"
     ],
     "deny": [],

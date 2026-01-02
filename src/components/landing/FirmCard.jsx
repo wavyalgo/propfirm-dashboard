@@ -1,19 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 import { Terminal, BarChart2, Star, Monitor, Check, Copy, ChevronRight } from 'lucide-react';
 import RadarChart from './RadarChart';
 
-const FirmCard = ({ firm }) => {
+const FirmCard = React.memo(({ firm }) => {
   const [copied, setCopied] = useState(false);
 
-  const handleCopy = () => {
+  const handleCopy = useCallback(() => {
     navigator.clipboard.writeText(firm.code);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
-  };
+  }, [firm.code]);
 
-  // 定義主題色樣式
+  // 使用 useMemo 優化主題色樣式計算
   const isFutures = firm.theme === 'blue';
-  const themeColors = {
+  const themeColors = useMemo(() => ({
     badgeBg: isFutures ? 'bg-blue-500/10' : firm.theme === 'purple' ? 'bg-purple-500/10' : 'bg-emerald-500/10',
     badgeText: isFutures ? 'text-blue-400' : firm.theme === 'purple' ? 'text-purple-400' : 'text-emerald-400',
     borderHover: isFutures ? 'group-hover:border-blue-500/50' : firm.theme === 'purple' ? 'group-hover:border-purple-500/50' : 'group-hover:border-emerald-500/50',
@@ -23,7 +23,7 @@ const FirmCard = ({ firm }) => {
         ? 'from-purple-600 to-fuchsia-600 hover:from-purple-500 hover:to-fuchsia-500 shadow-purple-900/20'
         : 'from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 shadow-emerald-900/20',
     glow: isFutures ? 'from-blue-500/5' : firm.theme === 'purple' ? 'from-purple-500/5' : 'from-emerald-500/5'
-  };
+  }), [firm.theme, isFutures]);
 
   return (
     <div className={`relative group bg-white dark:bg-[#0F172A]/80 backdrop-blur-md rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden transition-all duration-300 ${themeColors.borderHover} hover:shadow-2xl hover:-translate-y-1`}>
@@ -109,6 +109,8 @@ const FirmCard = ({ firm }) => {
       </div>
     </div>
   );
-};
+});
+
+FirmCard.displayName = 'FirmCard';
 
 export default FirmCard;

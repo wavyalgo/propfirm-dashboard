@@ -6,7 +6,7 @@ import PartnersSection from '../components/landing/PartnersSection';
 import AboutUsSection from '../components/landing/AboutUsSection';
 import DiscountSection from '../components/landing/DiscountSection';
 import PropFirmsSection from '../components/landing/PropFirmsSection';
-import CommunitySection from '../components/landing/CommunitySection';
+import TradingToolsSection from '../components/landing/TradingToolsSection';
 import Footer from '../components/landing/Footer';
 
 export default function LandingPage() {
@@ -66,8 +66,8 @@ export default function LandingPage() {
       {/* Prop Firm Directory */}
       <PropFirmsSection />
 
-      {/* Community / Discord CTA */}
-      <CommunitySection />
+      {/* Trading Tools Section */}
+      <TradingToolsSection />
 
       {/* Footer */}
       <Footer />

@@ -1,44 +1,75 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 import { Star, Copy, Check, ExternalLink } from 'lucide-react';
 
-const PropFirmDiscountRow = ({ firm }) => {
+// 將顏色類別移到組件外部作為常量
+const COLOR_CLASSES = {
+  emerald: {
+    logoBg: 'bg-emerald-500',
+    border: 'hover:border-emerald-500/50',
+    shadow: 'hover:shadow-emerald-500/10'
+  },
+  blue: {
+    logoBg: 'bg-blue-500',
+    border: 'hover:border-blue-500/50',
+    shadow: 'hover:shadow-blue-500/10'
+  },
+  purple: {
+    logoBg: 'bg-purple-500',
+    border: 'hover:border-purple-500/50',
+    shadow: 'hover:shadow-purple-500/10'
+  },
+  indigo: {
+    logoBg: 'bg-indigo-500',
+    border: 'hover:border-indigo-500/50',
+    shadow: 'hover:shadow-indigo-500/10'
+  },
+  amber: {
+    logoBg: 'bg-amber-500',
+    border: 'hover:border-amber-500/50',
+    shadow: 'hover:shadow-amber-500/10'
+  },
+  orange: {
+    logoBg: 'bg-orange-500',
+    border: 'hover:border-orange-500/50',
+    shadow: 'hover:shadow-orange-500/10'
+  },
+  cyan: {
+    logoBg: 'bg-cyan-500',
+    border: 'hover:border-cyan-500/50',
+    shadow: 'hover:shadow-cyan-500/10'
+  },
+  teal: {
+    logoBg: 'bg-teal-500',
+    border: 'hover:border-teal-500/50',
+    shadow: 'hover:shadow-teal-500/10'
+  },
+  sky: {
+    logoBg: 'bg-sky-500',
+    border: 'hover:border-sky-500/50',
+    shadow: 'hover:shadow-sky-500/10'
+  },
+  violet: {
+    logoBg: 'bg-violet-500',
+    border: 'hover:border-violet-500/50',
+    shadow: 'hover:shadow-violet-500/10'
+  },
+  rose: {
+    logoBg: 'bg-rose-500',
+    border: 'hover:border-rose-500/50',
+    shadow: 'hover:shadow-rose-500/10'
+  }
+};
+
+const PropFirmDiscountRow = React.memo(({ firm }) => {
   const [copied, setCopied] = useState(false);
 
-  const handleCopy = () => {
+  const handleCopy = useCallback(() => {
     navigator.clipboard.writeText(firm.code);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
-  };
+  }, [firm.code]);
 
-  const colorClasses = {
-    emerald: {
-      logoBg: 'bg-emerald-500',
-      border: 'hover:border-emerald-500/50',
-      shadow: 'hover:shadow-emerald-500/10'
-    },
-    blue: {
-      logoBg: 'bg-blue-500',
-      border: 'hover:border-blue-500/50',
-      shadow: 'hover:shadow-blue-500/10'
-    },
-    purple: {
-      logoBg: 'bg-purple-500',
-      border: 'hover:border-purple-500/50',
-      shadow: 'hover:shadow-purple-500/10'
-    },
-    indigo: {
-      logoBg: 'bg-indigo-500',
-      border: 'hover:border-indigo-500/50',
-      shadow: 'hover:shadow-indigo-500/10'
-    },
-    amber: {
-      logoBg: 'bg-amber-500',
-      border: 'hover:border-amber-500/50',
-      shadow: 'hover:shadow-amber-500/10'
-    }
-  };
-
-  const colors = colorClasses[firm.color];
+  const colors = useMemo(() => COLOR_CLASSES[firm.color], [firm.color]);
 
   return (
     <div className={`group bg-white dark:bg-[#111827]/60 backdrop-blur-sm rounded-xl border border-slate-200 dark:border-slate-800 ${colors.border} transition-all duration-300 ${colors.shadow} hover:shadow-lg hover:-translate-y-1 p-5 grid grid-cols-1 md:grid-cols-12 gap-4 items-center relative overflow-hidden`}>
@@ -118,6 +149,8 @@ const PropFirmDiscountRow = ({ firm }) => {
       </div>
     </div>
   );
-};
+});
+
+PropFirmDiscountRow.displayName = 'PropFirmDiscountRow';
 
 export default PropFirmDiscountRow;

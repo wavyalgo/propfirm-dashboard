@@ -1,50 +1,61 @@
-import React from 'react';
+import React, { useMemo } from 'react';
+
+// 常量定義 - 移到組件外部避免重複創建
+const LABELS = ['價格', '規則', '出金', '平台', '客服'];
+const CENTER = 60;
+const MAX_RADIUS = 35;
+const GRID_LEVELS = [20, 40, 60, 80, 100];
+
+const COLOR_MAP = {
+  blue: { fill: 'rgba(59, 130, 246, 0.2)', stroke: 'rgb(59, 130, 246)', grid: 'rgba(148, 163, 184, 0.15)' },
+  emerald: { fill: 'rgba(16, 185, 129, 0.2)', stroke: 'rgb(16, 185, 129)', grid: 'rgba(148, 163, 184, 0.15)' },
+  purple: { fill: 'rgba(168, 85, 247, 0.2)', stroke: 'rgb(168, 85, 247)', grid: 'rgba(148, 163, 184, 0.15)' }
+};
 
 // 五邊形雷達圖組件
-const RadarChart = ({ stats, color }) => {
-  const labels = ['價格', '規則', '出金', '平台', '客服'];
-  const values = [stats.price, stats.rules, stats.withdrawal, stats.platform, stats.support];
+const RadarChart = React.memo(({ stats, color }) => {
+  const values = useMemo(() => [
+    stats.price,
+    stats.rules,
+    stats.withdrawal,
+    stats.platform,
+    stats.support
+  ], [stats.price, stats.rules, stats.withdrawal, stats.platform, stats.support]);
 
-  // 計算五邊形的點座標 (增加中心点和半径以留出标签空间)
-  const center = 60; // 中心点位置
-  const maxRadius = 35; // 最大半径，留出更多空间给标签
+  const colors = useMemo(() => COLOR_MAP[color] || COLOR_MAP.blue, [color]);
 
-  const getPoint = (value, index) => {
-    const angle = (Math.PI * 2 * index) / 5 - Math.PI / 2; // 從頂部開始
-    const radius = (value / 100) * maxRadius;
-    const x = center + radius * Math.cos(angle);
-    const y = center + radius * Math.sin(angle);
-    return `${x},${y}`;
-  };
+  // 計算點座標的函數
+  const getPoint = useMemo(() => {
+    return (value, index) => {
+      const angle = (Math.PI * 2 * index) / 5 - Math.PI / 2;
+      const radius = (value / 100) * MAX_RADIUS;
+      const x = CENTER + radius * Math.cos(angle);
+      const y = CENTER + radius * Math.sin(angle);
+      return `${x},${y}`;
+    };
+  }, []);
+
+  const getGridPoint = useMemo(() => {
+    return (percentage, index) => {
+      const angle = (Math.PI * 2 * index) / 5 - Math.PI / 2;
+      const radius = (percentage / 100) * MAX_RADIUS;
+      const x = CENTER + radius * Math.cos(angle);
+      const y = CENTER + radius * Math.sin(angle);
+      return `${x},${y}`;
+    };
+  }, []);
 
   // 生成五邊形路徑
-  const dataPath = values.map((value, index) => getPoint(value, index)).join(' ');
-
-  // 生成背景網格（5個層級）
-  const gridLevels = [20, 40, 60, 80, 100];
-
-  const getGridPoint = (percentage, index) => {
-    const angle = (Math.PI * 2 * index) / 5 - Math.PI / 2;
-    const radius = (percentage / 100) * maxRadius;
-    const x = center + radius * Math.cos(angle);
-    const y = center + radius * Math.sin(angle);
-    return `${x},${y}`;
-  };
-
-  // 顏色映射
-  const colorMap = {
-    blue: { fill: 'rgba(59, 130, 246, 0.2)', stroke: 'rgb(59, 130, 246)', grid: 'rgba(148, 163, 184, 0.15)' },
-    emerald: { fill: 'rgba(16, 185, 129, 0.2)', stroke: 'rgb(16, 185, 129)', grid: 'rgba(148, 163, 184, 0.15)' },
-    purple: { fill: 'rgba(168, 85, 247, 0.2)', stroke: 'rgb(168, 85, 247)', grid: 'rgba(148, 163, 184, 0.15)' }
-  };
-
-  const colors = colorMap[color] || colorMap.blue;
+  const dataPath = useMemo(() =>
+    values.map((value, index) => getPoint(value, index)).join(' '),
+    [values, getPoint]
+  );
 
   return (
     <div className="flex items-center justify-center">
       <svg viewBox="0 0 120 120" className="w-36 h-36">
         {/* 背景網格 */}
-        {gridLevels.map((level, levelIndex) => (
+        {GRID_LEVELS.map((level, levelIndex) => (
           <polygon
             key={levelIndex}
             points={[0, 1, 2, 3, 4].map(i => getGridPoint(level, i)).join(' ')}
@@ -60,8 +71,8 @@ const RadarChart = ({ stats, color }) => {
           return (
             <line
               key={i}
-              x1={center}
-              y1={center}
+              x1={CENTER}
+              y1={CENTER}
               x2={point[0]}
               y2={point[1]}
               stroke={colors.grid}
@@ -94,11 +105,11 @@ const RadarChart = ({ stats, color }) => {
         })}
 
         {/* 標籤 */}
-        {labels.map((label, index) => {
+        {LABELS.map((label, index) => {
           const angle = (Math.PI * 2 * index) / 5 - Math.PI / 2;
-          const labelRadius = 52; // 标签距离中心的半径，确保在图表外围
-          const x = center + labelRadius * Math.cos(angle);
-          const y = center + labelRadius * Math.sin(angle);
+          const labelRadius = 52;
+          const x = CENTER + labelRadius * Math.cos(angle);
+          const y = CENTER + labelRadius * Math.sin(angle);
 
           return (
             <text
@@ -116,6 +127,8 @@ const RadarChart = ({ stats, color }) => {
       </svg>
     </div>
   );
-};
+});
+
+RadarChart.displayName = 'RadarChart';
 
 export default RadarChart;

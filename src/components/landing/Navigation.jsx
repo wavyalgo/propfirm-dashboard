@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { BookOpen, Monitor, CreditCard, BarChart2, MessageCircle, Terminal, ChevronDown, Sun, Moon, Menu, X, Calendar, Calculator, Wrench } from 'lucide-react';
+import { BookOpen, Monitor, CreditCard, BarChart2, Terminal, ChevronDown, Sun, Moon, Menu, X } from 'lucide-react';
 
 export default function Navigation({ theme, toggleTheme, isMenuOpen, setIsMenuOpen }) {
   return (
@@ -51,57 +51,29 @@ export default function Navigation({ theme, toggleTheme, isMenuOpen, setIsMenuOp
             </div>
           </div>
 
-          {/* Propfirm測評 */}
-          <a href="#firms" className="hover:text-slate-900 dark:hover:text-white transition-colors relative group py-2">
-            Propfirm測評
-            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-emerald-500 transition-all duration-300 group-hover:w-full shadow-[0_0_10px_rgba(16,185,129,0.5)]"></span>
-          </a>
-
           {/* 折扣中心 */}
           <a href="#discounts" className="hover:text-slate-900 dark:hover:text-white transition-colors relative group py-2">
             折扣中心
             <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-emerald-500 transition-all duration-300 group-hover:w-full shadow-[0_0_10px_rgba(16,185,129,0.5)]"></span>
           </a>
 
-          {/* 資源工具 - 下拉菜單 */}
-          <div className="relative group">
-            <button className="hover:text-slate-900 dark:hover:text-white transition-colors relative py-2 flex items-center gap-1">
-              資源工具
-              <ChevronDown size={16} className="group-hover:rotate-180 transition-transform" />
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-emerald-500 transition-all duration-300 group-hover:w-full shadow-[0_0_10px_rgba(16,185,129,0.5)]"></span>
-            </button>
-
-            {/* 下拉菜單 */}
-            <div className="absolute top-full left-0 mt-2 w-56 bg-white dark:bg-slate-800 rounded-xl shadow-2xl border border-slate-200 dark:border-slate-700 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 py-2">
-              <a href="#calendar" className="flex items-center gap-3 px-4 py-3 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors group/item">
-                <Calendar size={18} className="text-orange-500" />
-                <div>
-                  <div className="font-semibold text-slate-900 dark:text-white text-sm">財經日曆</div>
-                  <div className="text-xs text-slate-500 dark:text-slate-400">即時經濟數據</div>
-                </div>
-              </a>
-              <a href="#calculator" className="flex items-center gap-3 px-4 py-3 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors group/item">
-                <Calculator size={18} className="text-cyan-500" />
-                <div>
-                  <div className="font-semibold text-slate-900 dark:text-white text-sm">倉位風險計算器</div>
-                  <div className="text-xs text-slate-500 dark:text-slate-400">精準計算倉位</div>
-                </div>
-              </a>
-              <a href="#tools" className="flex items-center gap-3 px-4 py-3 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors group/item">
-                <Wrench size={18} className="text-indigo-500" />
-                <div>
-                  <div className="font-semibold text-slate-900 dark:text-white text-sm">推薦工具</div>
-                  <div className="text-xs text-slate-500 dark:text-slate-400">精選交易工具</div>
-                </div>
-              </a>
-            </div>
-          </div>
-
-          {/* 交易策略專區 */}
-          <a href="#courses" className="hover:text-slate-900 dark:hover:text-white transition-colors relative group py-2">
-            交易策略專區
+          {/* Propfirm測評 */}
+          <a href="#firms" className="hover:text-slate-900 dark:hover:text-white transition-colors relative group py-2">
+            Propfirm測評
             <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-emerald-500 transition-all duration-300 group-hover:w-full shadow-[0_0_10px_rgba(16,185,129,0.5)]"></span>
           </a>
+
+          {/* 交易工具 */}
+          <a href="#tools" className="hover:text-slate-900 dark:hover:text-white transition-colors relative group py-2">
+            交易工具
+            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-emerald-500 transition-all duration-300 group-hover:w-full shadow-[0_0_10px_rgba(16,185,129,0.5)]"></span>
+          </a>
+
+          {/* 交易策略專區 */}
+          <Link to="/strategy" className="hover:text-slate-900 dark:hover:text-white transition-colors relative group py-2">
+            交易策略專區
+            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-emerald-500 transition-all duration-300 group-hover:w-full shadow-[0_0_10px_rgba(16,185,129,0.5)]"></span>
+          </Link>
         </div>
 
         <div className="hidden md:flex items-center gap-4">
@@ -117,12 +89,8 @@ export default function Navigation({ theme, toggleTheme, isMenuOpen, setIsMenuOp
             className="flex items-center gap-2 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white px-5 py-2.5 rounded-xl font-bold transition-all shadow-lg shadow-emerald-900/20 hover:shadow-emerald-500/30 hover:-translate-y-0.5 border border-white/5"
           >
             <BarChart2 size={18} />
-            Propfirm績效記錄
+            Propfirm現金流組合
           </Link>
-          <button className="flex items-center gap-2 bg-[#5865F2] hover:bg-[#4752C4] text-white px-5 py-2.5 rounded-xl font-bold transition-all shadow-lg shadow-indigo-900/20 hover:shadow-indigo-500/30 hover:-translate-y-0.5 border border-white/5">
-            <MessageCircle size={18} />
-            加入 Discord
-          </button>
         </div>
 
         <button className="md:hidden text-slate-700 dark:text-slate-300" onClick={() => setIsMenuOpen(!isMenuOpen)}>
@@ -153,32 +121,15 @@ export default function Navigation({ theme, toggleTheme, isMenuOpen, setIsMenuOp
           <div className="border-t border-slate-200 dark:border-slate-700 my-2"></div>
 
           {/* 其他菜單項 */}
-          <a href="#firms" className="block py-2 px-2 text-slate-700 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 font-medium">Propfirm測評</a>
           <a href="#discounts" className="block py-2 px-2 text-slate-700 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 font-medium" onClick={() => setIsMenuOpen(false)}>折扣中心</a>
+          <a href="#firms" className="block py-2 px-2 text-slate-700 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 font-medium">Propfirm測評</a>
 
-          {/* 資源工具 */}
-          <div className="space-y-1 mt-2">
-            <div className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider px-2 py-1">資源工具</div>
-            <a href="#calendar" className="block py-2 px-4 text-slate-700 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 rounded-lg font-medium text-sm flex items-center gap-2" onClick={() => setIsMenuOpen(false)}>
-              <Calendar size={16} className="text-orange-500" />
-              財經日曆
-            </a>
-            <a href="#calculator" className="block py-2 px-4 text-slate-700 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 rounded-lg font-medium text-sm flex items-center gap-2" onClick={() => setIsMenuOpen(false)}>
-              <Calculator size={16} className="text-cyan-500" />
-              倉位風險計算器
-            </a>
-            <a href="#tools" className="block py-2 px-4 text-slate-700 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 rounded-lg font-medium text-sm flex items-center gap-2" onClick={() => setIsMenuOpen(false)}>
-              <Wrench size={16} className="text-indigo-500" />
-              推薦工具
-            </a>
-          </div>
-
-          <a href="#courses" className="block py-2 px-2 text-slate-700 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 font-medium">交易策略專區</a>
+          <a href="#tools" className="block py-2 px-2 text-slate-700 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 font-medium" onClick={() => setIsMenuOpen(false)}>交易工具</a>
+          <Link to="/strategy" className="block py-2 px-2 text-slate-700 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 font-medium" onClick={() => setIsMenuOpen(false)}>交易策略專區</Link>
 
           <div className="border-t border-slate-200 dark:border-slate-700 my-2"></div>
 
-          <Link to="/dashboard" className="block py-2 px-2 text-emerald-600 dark:text-emerald-400 hover:text-emerald-500 dark:hover:text-emerald-300 font-medium">Propfirm績效記錄</Link>
-          <a href="#" className="block py-2 px-2 text-slate-700 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 font-medium">Discord 社群</a>
+          <Link to="/dashboard" className="block py-2 px-2 text-emerald-600 dark:text-emerald-400 hover:text-emerald-500 dark:hover:text-emerald-300 font-medium">Propfirm現金流組合</Link>
         </div>
       )}
     </nav>

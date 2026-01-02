@@ -24,7 +24,10 @@ export const SelectGroup = ({ label, value, onChange, options }) => (
                 onChange={onChange}
                 className="w-full bg-slate-100 dark:bg-[#18181b] border border-slate-200 dark:border-white/[0.08] rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-transparent transition-all appearance-none cursor-pointer"
             >
-                {options.map(o => <option key={o} value={o}>{o}</option>)}
+                {options.map((o, idx) => {
+                    const optValue = typeof o === 'string' ? o : o.name;
+                    return <option key={optValue || idx} value={optValue}>{optValue}</option>;
+                })}
             </select>
             <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500 pointer-events-none" />
         </div>

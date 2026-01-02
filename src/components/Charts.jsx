@@ -1,5 +1,15 @@
 import React from 'react';
 
+// Safe number formatting helper
+const formatNumber = (num) => {
+    if (num === null || num === undefined || isNaN(num)) return '0';
+    try {
+        return Number(num).toLocaleString();
+    } catch {
+        return String(num);
+    }
+};
+
 export const ChartRow = ({ label, value, total, color, showPercent = true }) => {
     const percent = total > 0 ? (value / total) * 100 : 0;
     return (
@@ -7,7 +17,7 @@ export const ChartRow = ({ label, value, total, color, showPercent = true }) => 
             <div className="flex justify-between text-xs font-semibold">
                 <span className="text-slate-300">{label}</span>
                 <span className="text-slate-500">
-                    ${value.toLocaleString()} {showPercent && `(${percent.toFixed(0)}%)`}
+                    ${formatNumber(value)} {showPercent && `(${percent.toFixed(0)}%)`}
                 </span>
             </div>
             <div className="h-2 w-full bg-slate-800/50 rounded-full overflow-hidden">
@@ -68,7 +78,7 @@ export const DonutChart = ({ data, total, label }) => {
                 </svg>
                 <div className="absolute flex flex-col items-center justify-center text-center">
                     <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">{label}</span>
-                    <span className="text-2xl font-black text-slate-900 dark:text-white font-mono tracking-tight">${total.toLocaleString()}</span>
+                    <span className="text-2xl font-black text-slate-900 dark:text-white font-mono tracking-tight">${formatNumber(total)}</span>
                 </div>
             </div>
 
@@ -84,7 +94,7 @@ export const DonutChart = ({ data, total, label }) => {
                             </div>
                             <div className="w-px h-3 bg-slate-200 dark:bg-slate-700 mx-1"></div>
                             <span className="text-slate-500 font-mono">
-                                ${item.value.toLocaleString()} <span className="text-[10px] opacity-70">({percent.toFixed(1)}%)</span>
+                                ${(Number(item.value) || 0).toLocaleString()} <span className="text-[10px] opacity-70">({percent.toFixed(1)}%)</span>
                             </span>
                         </div>
                     );
