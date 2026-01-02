@@ -1,0 +1,1 @@
+import{c as o}from"./sun-aPxBaz-g.js";const e=[["path",{d:"M5 21v-6",key:"1hz6c0"}],["path",{d:"M12 21V3",key:"1lcnhd"}],["path",{d:"M19 21V9",key:"unv183"}]],n=o("chart-no-axes-column",e);const t=[["path",{d:"M12 19h8",key:"baeox8"}],["path",{d:"m4 17 6-6-6-6",key:"1yngyt"}]],c=o("terminal",t);export{n as C,c as T};
